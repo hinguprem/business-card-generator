@@ -1,0 +1,101 @@
+import React, { useState, useRef } from 'react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import './App.css';
+
+function Bc() {
+  const [data, setData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    contactNumber: '',
+    companyName: '',
+    title: '',
+    website: '',
+  });
+
+  const cardRef = useRef(null);
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const exportAsImage = () => {
+    html2canvas(cardRef.current, { scale: 2, backgroundColor: '#ffffff' }).then((canvas) => {
+      const link = document.createElement('a');
+      link.download = 'business_card.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    });
+  };
+
+  const exportAsPDF = () => {
+    html2canvas(cardRef.current, { scale: 2, backgroundColor: '#ffffff' }).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('portrait', 'px', [canvas.width, canvas.height]);
+      pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+      pdf.save('business_card.pdf');
+    });
+  };
+
+  return (
+    <div className="main-container">
+      <h2>Business Card Generator</h2>
+
+      <div className="form-section">
+        <input name="firstName" onChange={handleChange} className="form-control" placeholder="First name" />
+        <br />
+        <input name="lastName" onChange={handleChange} className="form-control" placeholder="Last name" />
+        <br />
+        <input name="email" onChange={handleChange} className="form-control" placeholder="Email" />
+        <br />
+        <input name="contactNumber" onChange={handleChange} className="form-control" placeholder="Contact Number" />
+        <br />
+        <input name="companyName" onChange={handleChange} className="form-control" placeholder="Company Name" />
+        <br />
+        <input name="title" onChange={handleChange} className="form-control" placeholder="Title" />
+        <br />
+        <input name="website" onChange={handleChange} className="form-control" placeholder="Website" />
+        <br />
+      </div>
+
+      <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+        <button className="btn btn-primary" onClick={exportAsImage}>Download as Image</button>{' '}
+        <button className="btn btn-danger" onClick={exportAsPDF}>Download as PDF</button>
+      </div>
+
+      {/* Card container aligned right-middle */}
+      <div className="card-wrapper-container">
+        <div className="card-wrapper" ref={cardRef}>
+          <div className="card front">
+            <div className="blue"></div>
+            <div className="yellow"></div>
+            <div className="pink"></div>
+            <div className="dots"></div>
+            <div className="personal-intro">
+              <p>{data.firstName} {data.lastName}</p>
+              <p>{data.title}</p>
+            </div>
+          </div>
+
+          <div className="card back">
+            <div className="yellow"></div>
+            <div className="top dots"></div>
+            <div className="personal-info">
+              <p>{data.firstName} {data.lastName}</p>
+              <p>{data.title}</p>
+              <p>{data.companyName}</p>
+              <p>{data.email}</p>
+              <p>{data.contactNumber}</p>
+              <p>{data.website}</p>
+            </div>
+            <div className="bottom dots"></div>
+            <div className="pink"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Bc;
