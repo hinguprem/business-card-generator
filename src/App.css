@@ -3,6 +3,73 @@
   --pink: #fa001a;
   --yellow: #f1ef1c;
 }
+input {
+  width: 100%;
+  max-width: 300px;
+  margin: 6px 0;
+  padding: 10px 14px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  transition: border 0.3s, box-shadow 0.3s, background-color 0.3s;
+  font-size: 14px;
+  color: #333;
+}
+
+input::placeholder {
+  color: #aaa;
+  transition: color 0.3s;
+}
+
+input:hover {
+  border-color: #7f5af0;
+  background-color: #f9f9ff;
+}
+
+input:focus {
+  outline: none;
+  border-color: #7f5af0;
+  box-shadow: 0 0 6px rgba(127, 90, 240, 0.4);
+  background-color: #ffffff;
+}
+
+input:focus::placeholder {
+  color: #ccc;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #000000; /* Elegant navy blue */
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+/* Hover Effect */
+h2:hover {
+  color: #FC427B; /* Beautiful pink on hover */
+  transform: scale(1.05);
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(to right, #1B9CFC, #FC427B);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+}
+
+h2:hover::after {
+  transform: scaleX(1);
+}
 
 /* RESET */
 * {
@@ -18,7 +85,11 @@ body, html {
   align-items: start;
   background-color: #f4f4f4;
   font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
+
+
 
 .main-container {
   display: flex;
@@ -27,11 +98,6 @@ body, html {
   padding: 30px;
   width: 100%;
   max-width: 1200px;
-}
-
-h2 {
-  margin-bottom: 20px;
-  font-size: 24px;
 }
 
 /* RESPONSIVE FLEX LAYOUT */
@@ -76,6 +142,7 @@ input {
   margin-top: 15px;
 }
 
+/* BUTTON BASE STYLES (Keep your existing ones) */
 button {
   margin: 10px 5px 0 0;
   padding: 10px 16px;
@@ -84,6 +151,7 @@ button {
   color: white;
   font-weight: bold;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 button.blue {
@@ -93,6 +161,23 @@ button.blue {
 button.red {
   background-color: #dc3545;
 }
+
+/* BUTTON HOVER EFFECT */
+button:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  opacity: 0.95;
+}
+
+/* OPTIONAL: Add a slight glow */
+button.blue:hover {
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.6);
+}
+
+button.red:hover {
+  box-shadow: 0 0 10px rgba(220, 53, 69, 0.6);
+}
+
 
 /* CARD WRAPPER */
 .card-container {
@@ -247,4 +332,30 @@ button.red {
   background-color: var(--pink);
   grid-column: 8 / span 5;
   grid-row: 10 / span 3;
+}
+.card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  transform: skewX(-25deg);
+  transition: left 0.75s ease;
+}
+
+.card:hover::after {
+  left: 125%;
 }
