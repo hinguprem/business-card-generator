@@ -4,44 +4,118 @@
   --yellow: #f1ef1c;
 }
 
-/* Card dot patterns */
-.dots {
-  background:
-    radial-gradient(var(--pink) 20%, transparent 19%),
-    radial-gradient(var(--pink) 20%, transparent 19%);
-  background-size: 6px 6px;
-  background-position: 0 0, 3px 3px;
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* This centers the card wrapper vertically and aligns to right */
-.card-wrapper-container {
-  position: fixed;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
+body, html {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  background-color: #f4f4f4;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.main-container {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  padding-right: 30px;
-  z-index: 100;
+  align-items: center;
+  padding: 30px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+/* RESPONSIVE FLEX LAYOUT */
+.layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 40px;
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .card-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+  }
+
+  .form-section {
+    flex: 1;
+  }
+}
+
+/* FORM INPUTS */
+input {
+  width: 100%;
+  max-width: 300px;
+  margin: 6px 0;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* BUTTONS */
+.btn-group {
+  margin-top: 15px;
+}
+
+button {
+  margin: 10px 5px 0 0;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button.blue {
+  background-color: #007bff;
+}
+
+button.red {
+  background-color: #dc3545;
+}
+
+/* CARD WRAPPER */
+.card-container {
+  width: 100%;
 }
 
 .card-wrapper {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   gap: 20px;
 }
 
 .card {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   display: grid;
-  margin-right: 200px;
   font-family: 'Trebuchet MS', sans-serif;
   height: 200px;
   width: 350px;
+  background: white;
 }
 
-/* Front of card */
+/* FRONT */
 .front {
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(4, 1fr);
@@ -110,7 +184,7 @@
   font-size: 10px;
 }
 
-/* Back of card */
+/* BACK */
 .back {
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(12, 1fr);
@@ -173,55 +247,4 @@
   background-color: var(--pink);
   grid-column: 8 / span 5;
   grid-row: 10 / span 3;
-}
-
-/* Reset */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body, html {
-  height: 100%;
-  background-color: #f4f4f4;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-/* Layout */
-.main-container {
-  padding: 40px 20px;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.form-section {
-  margin-top: 30px;
-}
-
-input {
-  width: 100%;
-  max-width: 300px;
-  margin: 6px 0;
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button {
-  margin: 10px 5px;
-  padding: 8px 14px;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.btn.btn-primary {
-  background-color: #007bff;
-}
-
-.btn.btn-danger {
-  background-color: #dc3545;
 }
